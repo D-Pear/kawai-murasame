@@ -2,14 +2,16 @@
     <img src="./assets/murasame.png" height="64"></img>
     <h1>书签小丛雨</h1>
 </figure>
-本项目提供了一个小丛雨桌宠书签工具生成器, 可以做到点击浏览器书签向当前网页添加可以自由飘动的小丛雨桌宠
+<center>
+    本项目提供了一个小丛雨桌宠书签工具生成器, 可以做到点击浏览器书签向当前网页添加可以自由飘动的小丛雨桌宠
+    <img src="./assets/preview-ui.png" height="360"></img>
+</center>
 
 ## 使用方法
  1. 访问本仓库的[GitHub Pages](https://d-pear.github.io/kawai-murasame/) <br>
  2. 在编辑框中修改需要自定义的参数 <br>
  3. 点击生成书签按钮并将生成的书签连接拖动到书签栏 <br>
  4. 在想要使用的页面点击书签即可召唤小丛雨 <br>
-![PREVIWE.png](./assets/preview-ui.png)
 
 ## 特性
  - 当鼠标移动(或者触屏点击时)时, 小丛雨会自动跟随鼠标(或点击位置)

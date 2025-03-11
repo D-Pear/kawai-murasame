@@ -111,7 +111,7 @@
             autofocus: true
         });
 
-        fetch('ciallo.js').then(res => res.ok ? res.text() : Promise.reject())
+        fetch('./murasame.js').then(res => res.ok ? res.text() : Promise.reject())
             .then(code => editor.setValue(code))
             .catch(() => editor.setValue('// 加载失败\n'))
             .finally(() => editor.refresh());
