@@ -1,28 +1,28 @@
 (function () {
 
     // 参数设置
-    const imgSrc = 'https://img.picui.cn/free/2025/03/06/67c9c3ea4d957.png'; // 理论上也可以换成其他角色就是了
-    const cssAnimtaion = true;           // 启用额外动画(如果卡顿则关闭)
-    const imgScale = 0.5;                // 图像缩放
-    const maxSpeed = 720;                // 最大移动速度(正常)
-    const acceleration = 12;             // 加速度(正常)
-    const idleMaxSpeed = 240;            // 最大移动速度(闲置)
-    const idleAcceleration = 4;          // 加速度(闲置)
-    const minRandomMoveRatio = 0.4;      // 随机移动最小距离(闲置)
-    const maxRandomMoveAttempts = 25;    // 随机移动最大重试次数(闲置)
-    const idleTimeout = 5000;            // 闲置超时时间
-    const bobEffectStergen = 1.5;        // 浮动特效强度
-    const bobEffectDuration = 150;       // 浮动特效周期
-    const minDistance = 100;             // 鼠标近进距离
-    const friction = 0.088;              // 摩擦系数(全局)
-    const closeFriction = 0.12;          // 摩擦系数(近进)
-    const maxAngle = 90;                 // 最大旋转角
-    const angleRectification = 15;       // 旋转角矫正
-    const heartDuration = 1500;          // 爱心出现间隔时间
-    const heartScale = 0.6;              // 爱心大小缩放
-    const heartRandomDistance = 40;      // 爱心随机距离
-    const heartOpacity = 0.7;            // 爱心基础透明度
-    const screenCornerSaveDistance = 75; // 屏幕边缘安全区
+    const imgSrc = './assets/murasame.png';   // 理论上也可以换成其他角色就是了
+    const cssAnimtaion = true;                // 启用额外动画(如果卡顿则关闭)
+    const imgScale = 0.5;                     // 图像缩放
+    const maxSpeed = 720;                     // 最大移动速度(正常)
+    const acceleration = 12;                  // 加速度(正常)
+    const idleMaxSpeed = 240;                 // 最大移动速度(闲置)
+    const idleAcceleration = 4;               // 加速度(闲置)
+    const minRandomMoveRatio = 0.4;           // 随机移动最小距离(闲置)
+    const maxRandomMoveAttempts = 25;         // 随机移动最大重试次数(闲置)
+    const idleTimeout = 5000;                 // 闲置超时时间
+    const bobEffectStergen = 1.5;             // 浮动特效强度
+    const bobEffectDuration = 150;            // 浮动特效周期
+    const minDistance = 100;                  // 鼠标近进距离
+    const friction = 0.088;                   // 摩擦系数(全局)
+    const closeFriction = 0.12;               // 摩擦系数(近进)
+    const maxAngle = 90;                      // 最大旋转角
+    const angleRectification = 15;            // 旋转角矫正
+    const heartDuration = 1500;               // 爱心出现间隔时间
+    const heartScale = 0.6;                   // 爱心大小缩放
+    const heartRandomDistance = 40;           // 爱心随机距离
+    const heartOpacity = 0.7;                 // 爱心基础透明度
+    const screenCornerSaveDistance = 75;      // 屏幕边缘安全区
 
     // 容器
     const character = document.createElement('img');

@@ -8,9 +8,11 @@
     <link rel="icon" href="https://img.picui.cn/free/2025/03/06/67c9c3ea4d957.png">
     <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/codemirror/5.65.1/codemirror.min.css">
-    <link rel="stylesheet" href="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/codemirror/5.65.1/theme/material.min.css">
+    <link rel="stylesheet"
+        href="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/codemirror/5.65.1/theme/material.min.css">
     <script src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
-    <script src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/codemirror/5.65.1/mode/javascript/javascript.min.js"></script>
+    <script
+        src="https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/codemirror/5.65.1/mode/javascript/javascript.min.js"></script>
     <script src="https://gcore.jsdelivr.net/npm/terser/dist/bundle.min.js"></script>
     <style>
         .cm-editor {
@@ -33,7 +35,8 @@
         <div class="bg-white rounded-lg shadow p-6">
             <div id="editor-container" class="mb-4 rounded-lg overflow-hidden"></div>
 
-            <button id="generate-btn" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">生成书签</button>
+            <button id="generate-btn"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">生成书签</button>
 
             <div id="output-section" class="mt-6 hidden">
                 <p class="text-gray-600 mb-2">拖动以下链接到书签栏: </p>
@@ -60,6 +63,46 @@
     </footer>
 
     <script>
+
+        function embedBase64Img(code) {
+            const imgSrcPattern = /const\s+imgSrc\s*=\s*'(.*?)'/;
+            const match = code.match(imgSrcPattern);
+
+            if (match && match[1]) {
+                const url = match[1];
+
+                const isFileUrl = /^(\.\/|\/|https?:\/\/)/.test(url);
+                if (isFileUrl) {
+
+                    return new Promise((resolve, reject) => {
+                        fetch(url)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            return new Promise((resolve_, reject_) => {
+                                const reader = new FileReader();
+                                reader.onloadend = () => resolve_(reader.result);
+                                reader.onerror = reject_;
+                                reader.readAsDataURL(blob);
+                            });
+                        })
+                        .then(base64 => {
+                            const newCode = code.replace(match[0], `const imgSrc = '${base64}'`);
+                            resolve(newCode);
+                        })
+                        .catch(error => {
+                            console.error('Error while fetching or converting the image:', error);
+                            reject(error);
+                        });
+                    })
+
+
+                }
+            }
+
+            return code;
+        }
+
+
         const editor = CodeMirror(document.getElementById("editor-container"), {
             mode: "javascript",
             theme: "material",
@@ -68,14 +111,17 @@
             autofocus: true
         });
 
-        fetch('./murasame.js').then(res => res.ok ? res.text() : Promise.reject())
+        fetch('ciallo.js').then(res => res.ok ? res.text() : Promise.reject())
             .then(code => editor.setValue(code))
             .catch(() => editor.setValue('// 加载失败\n'))
             .finally(() => editor.refresh());
 
         document.getElementById("generate-btn").addEventListener("click", async () => {
             try {
-                const { code } = await Terser.minify(editor.getValue(), {
+
+                const embedCode = await embedBase64Img(editor.getValue());
+
+                const { code } = await Terser.minify(embedCode, {
                     compress: { defaults: true },
                     format: { comments: false },
                     mangle: { toplevel: true }
